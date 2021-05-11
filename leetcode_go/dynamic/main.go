@@ -9,7 +9,7 @@ import "fmt"
 
 func main() {
 	fmt.Println(findMaxSubarray([]int{2, -1, -2, 3, -1, 4, 5}))
-	fmt.Println(coinChange([]int{1, 2, 4}, 11))
+	fmt.Println(coinChange([]int{2, 4}, 11))
 }
 
 func findMaxSubarray(nums []int) int {
@@ -44,6 +44,7 @@ func coinChange(coins []int, amount int) int {
 	dp := make(map[int]int, amount+1)
 
 	dp[0] = 0
+
 	for i := 1; i <= amount; i++ {
 		dp[i] = amount + 1
 	}
@@ -57,7 +58,8 @@ func coinChange(coins []int, amount int) int {
 			}
 		}
 	}
-	fmt.Println(dp)
-
+	if dp[amount] == amount+1 {
+		return -1
+	}
 	return dp[amount]
 }
