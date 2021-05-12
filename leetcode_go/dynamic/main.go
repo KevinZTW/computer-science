@@ -2,6 +2,8 @@
 //無後效性：子問題之間的依賴是單向性的，某階段狀態一旦確定，就不受後續決策的影響；
 //最優子結構：子問題之間必須相互獨立，或者說後續的計算可以通過前面的狀態推匯出來。
 
+//steps 1. create dp map 2. fill in initial value in dp map 3. figure out the convertion rule
+
 // 53. Maxium Subarray
 package main
 
@@ -10,6 +12,7 @@ import "fmt"
 func main() {
 	fmt.Println(findMaxSubarray([]int{2, -1, -2, 3, -1, 4, 5}))
 	fmt.Println(coinChange([]int{2, 4}, 11))
+	fmt.Println(uniquePath(7, 3))
 }
 
 func findMaxSubarray(nums []int) int {
@@ -62,4 +65,32 @@ func coinChange(coins []int, amount int) int {
 		return -1
 	}
 	return dp[amount]
+}
+
+func uniquePath(m, n int) int {
+
+	dp := make([][]int, m)
+	for i := 0; i < m; i++ {
+		dp[i] = make([]int, n)
+	}
+	fmt.Println(dp)
+	dp[0][0] = 0
+
+	for i := 0; i < m; i++ {
+		dp[i][0] = 1
+	}
+
+	for i := 0; i < n; i++ {
+		dp[0][i] = 1
+	}
+
+	for i := 1; i < m; i++ {
+		for j := 1; j < n; j++ {
+
+			dp[i][j] = dp[i-1][j] + dp[i][j-1]
+
+		}
+	}
+	fmt.Println(dp)
+	return dp[m-1][n-1]
 }

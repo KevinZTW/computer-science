@@ -1,5 +1,9 @@
 # Leetcode Practice in GO
 
+## Note
+
+- 想要遍歷填表 / 算值想到用 for loop
+
 ## Algorithms
 
 sort：quick sort、歸併排序、計數排序
